@@ -246,3 +246,6 @@ ModelManifest.xml
 
 # GUI
 GUI/
+
+# solution file
+*.sln
