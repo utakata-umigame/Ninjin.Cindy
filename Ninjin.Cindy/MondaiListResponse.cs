@@ -85,7 +85,7 @@ namespace Ninjin.Cindy
         private void Parse(string rawRes)
         {
             dynamic obj = JsonConvert.DeserializeObject(rawRes);
-            var res = obj.data.others;
+            var res = obj.data;//This step depends on Json format.
             foreach (var item in res)
             {
                 var mondai = new Mondai()
