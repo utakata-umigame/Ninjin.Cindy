@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 using System.Net; //webclient
 using Newtonsoft.Json; //json.NET
@@ -58,16 +59,8 @@ namespace Ninjin.Cindy
         protected override void Parse(string rawRes)
         {
             dynamic obj = JsonConvert.DeserializeObject(rawRes);
-            var res = obj.data;//This step depends on Json format.
-            foreach (var item in res)
-            {
-                var comment = new Comment()
-                {
-                    Id = item.id,
-                    Content = item.content
-                };
-                Objects.Add(comment);
-            }
+            var res = (IEnumerable<object>)obj.data;//This step depends on Json format.
+            Objects.AddRange(res.Select(x => Comment.FromJSON(x)));
         }
 
     }

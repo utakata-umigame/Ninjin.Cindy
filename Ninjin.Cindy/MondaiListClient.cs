@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Linq;
 
 using Newtonsoft.Json;//Json.NET
 using Ninjin.Cindy.Model;//Model
@@ -69,20 +70,8 @@ namespace Ninjin.Cindy
         protected override void Parse(string rawRes)
         {
             dynamic obj = JsonConvert.DeserializeObject(rawRes);
-            var res = obj.data;//This step depends on Json format.
-            foreach (var item in res)
-            {
-                var mondai = new Mondai()
-                {
-                    Id = item.id,
-                    Title = item.title,
-                    Sender = item.user_id.nickname,
-                    SenderId = item.user_id.id,
-                    Yami = item.yami,
-                    Score = item.score
-                };
-                Objects.Add(mondai);
-            }
+            var res = (IEnumerable<object>)obj.data;//This step depends on Json format.
+            Objects.AddRange(res.Select(x => Mondai.FromJSON(x)));
         }
     }
 }
