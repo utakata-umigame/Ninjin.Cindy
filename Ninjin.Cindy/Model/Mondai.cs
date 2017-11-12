@@ -11,6 +11,7 @@
         public int SenderId { get; set; }
         public bool Yami { get; set; }
         public double Score { get; set; }
+        public User Giver { get; set; }
         public override string ToString()
         {
             return Title;

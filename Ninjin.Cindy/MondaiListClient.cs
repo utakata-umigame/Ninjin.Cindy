@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 
 using Newtonsoft.Json;//Json.NET
-using System.Text.RegularExpressions;//Regex
-
 using Ninjin.Cindy.Model;//Model
 
 namespace Ninjin.Cindy
@@ -12,27 +9,35 @@ namespace Ninjin.Cindy
     /// <summary>
     /// a class to fetch Mondai list
     /// </summary>
-    public class MondaiListResponse:WebClient
+    public class MondaiListClient:ListClient
     {
         /// <summary>
         /// private constructor
         /// </summary>
-        private MondaiListResponse()
+        private MondaiListClient()
         {
-            Mondais = new List<Mondai>();
+            Objects = new List<object>();
             DownloadStringCompleted += MondaiListResponse_DownloadStringCompleted;
         }
+        protected override string endPoint
+        {
+            get
+            {
+                return "http://heyrict.pythonanywhere.com/api/mondai_list";
+            }
+        }
+
         /// <summary>
         /// Return Empty Response
         /// </summary>
         /// <returns></returns>
-        public static MondaiListResponse Empty()
+        public static MondaiListClient Empty()
         {
-            return new MondaiListResponse();
+            return new MondaiListClient();
         }
-        public static MondaiListResponse FetchData()
+        public static MondaiListClient FetchData()
         {
-            var res = new MondaiListResponse();
+            var res = new MondaiListClient();
             res.Fetch();
             return res;
         }
@@ -40,34 +45,13 @@ namespace Ninjin.Cindy
         /// Use API asyncronously
         /// </summary>
         /// <returns></returns>
-        public static MondaiListResponse FetchDataAsync()
+        public static MondaiListClient FetchDataAsync()
         {
-            var res = new MondaiListResponse();
+            var res = new MondaiListClient();
             res.StartFetch();
             return res;
         }
-        /// <summary>
-        /// Endpoint url
-        /// </summary>
-        static readonly string endPoint = "http://heyrict.pythonanywhere.com/api/mondai_list";
-        public event Action DownloadCompleted = delegate { };
-        /// <summary>
-        /// Mondai list
-        /// </summary>
-        public List<Mondai> Mondais { get; }
-        /// <summary>
-        /// Fetch Mondai list
-        /// </summary>
-        /// <returns>list of mondai</returns>
-        private void Fetch()
-        {
-            var result = Regex.Unescape(DownloadString(new Uri(endPoint)));
-            Parse(result);
-        }
-        private void StartFetch()
-        {
-            DownloadStringAsync(new Uri(endPoint));
-        }
+       
         /// <summary>
         /// callback
         /// </summary>
@@ -76,13 +60,13 @@ namespace Ninjin.Cindy
         private void MondaiListResponse_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             Parse(e.Result);
-            DownloadCompleted();
+            Load();
         }
         /// <summary>
         /// create mondai list based on raw json response.
         /// </summary>
         /// <param name="rawRes"></param>
-        private void Parse(string rawRes)
+        protected override void Parse(string rawRes)
         {
             dynamic obj = JsonConvert.DeserializeObject(rawRes);
             var res = obj.data;//This step depends on Json format.
@@ -97,7 +81,7 @@ namespace Ninjin.Cindy
                     Yami = item.yami,
                     Score = item.score
                 };
-                Mondais.Add(mondai);
+                Objects.Add(mondai);
             }
         }
     }
