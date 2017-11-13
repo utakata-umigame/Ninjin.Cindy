@@ -3,20 +3,15 @@
     /// <summary>
     /// User Model
     /// </summary>
-    public class User
+    public class User:CindyModel
     {
-        /// <summary>
-        /// private constructor
-        /// </summary>
-        private User()
+        public User()
         {
 
         }
-        public static User FromJSON(dynamic obj)
+        public override CindyModel FromJSON(dynamic obj)
         {
-            return new User()
-            {
-            };
+            return new User();
         }
     }
 }

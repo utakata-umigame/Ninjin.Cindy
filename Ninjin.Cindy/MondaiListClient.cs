@@ -71,7 +71,7 @@ namespace Ninjin.Cindy
         {
             dynamic obj = JsonConvert.DeserializeObject(rawRes);
             var res = (IEnumerable<object>)obj.data;//This step depends on Json format.
-            Objects.AddRange(res.Select(x => Mondai.FromJSON(x)));
+            Objects.AddRange(res.Select(x => CindyModel.FromJSON(x,ModelType.Mondai)));
         }
     }
 }

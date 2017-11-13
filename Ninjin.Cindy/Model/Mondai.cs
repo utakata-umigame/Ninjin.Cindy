@@ -5,13 +5,13 @@ namespace Ninjin.Cindy.Model
     /// <summary>
     /// Mondai model
     /// </summary>
-    public class Mondai
+    public class Mondai:CindyModel
     {
-        private Mondai()
+        public Mondai()
         {
 
         }
-        public static Mondai FromJSON(dynamic obj)
+        public override CindyModel FromJSON(dynamic obj)
         {
             try
             {

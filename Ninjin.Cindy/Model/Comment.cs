@@ -2,13 +2,13 @@
 
 namespace Ninjin.Cindy.Model
 {
-    public class Comment
+    public class Comment:CindyModel
     {
-        private Comment()
+        public Comment()
         {
 
         }
-        public static Comment FromJSON(dynamic obj)
+        public override CindyModel FromJSON(dynamic obj)
         {
             try
             {
@@ -16,7 +16,7 @@ namespace Ninjin.Cindy.Model
                 {
                     Id = obj.id,
                     Content = obj.content,
-                    Mondai = Mondai.FromJSON(obj.mondai_id)
+                    Mondai = CindyModel.FromJSON(obj.mondai_id, ModelType.Mondai)
                 };
             }
             catch
