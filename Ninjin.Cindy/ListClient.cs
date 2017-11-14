@@ -8,8 +8,14 @@ using System.Net.Http;
 
 namespace Ninjin.Cindy
 {
+    /// <summary>
+    /// List type client
+    /// </summary>
     public class ListClient:HttpClient
     {
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public ListClient()
         { 
             Objects = new List<CindyModel>();
@@ -43,6 +49,11 @@ namespace Ninjin.Cindy
                 throw new ArgumentNullException("no endpoint specified.");
             }
         }
+        /// <summary>
+        /// Fetch Data Asyncronously
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public async Task FetchDataAsync(ModelType type)
         {
             await Task.Run(()=>
@@ -57,6 +68,8 @@ namespace Ninjin.Cindy
         /// to be implemented in inherited class.
         /// /summary>
         /// <param name="rawRes"></param>
+        /// <param name="type"></param>
+        /// </summary>
         private void Parse(string rawRes, ModelType type)
         {
             dynamic obj = JsonConvert.DeserializeObject(rawRes);

@@ -52,6 +52,11 @@ namespace Ninjin.Cindy.Model
                     throw new ArgumentException();
             }
         }
+        /// <summary>
+        /// Create an instance from Json
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public abstract CindyModel FromJSON(dynamic obj);
     }
 }

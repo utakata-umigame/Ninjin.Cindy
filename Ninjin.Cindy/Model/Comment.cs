@@ -2,12 +2,23 @@
 
 namespace Ninjin.Cindy.Model
 {
+    /// <summary>
+    /// Comment model
+    /// </summary>
     public class Comment:CindyModel
     {
+        /// <summary>
+        /// Empty
+        /// </summary>
         public Comment()
         {
 
         }
+        /// <summary>
+        /// Override FromJSON
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override CindyModel FromJSON(dynamic obj)
         {
             try
@@ -25,6 +36,9 @@ namespace Ninjin.Cindy.Model
                 throw new ArgumentException("Invalid type");
             }
         }
+        /// <summary>
+        /// Header
+        /// </summary>
         public static readonly string CsvHeader = "Id,Sender-Name,Mondai-Id,Mondai-Title,Comment\n";
         public int Id { get; set; }
         public string Content { get; set; }
