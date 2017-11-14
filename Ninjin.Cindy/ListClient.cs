@@ -27,10 +27,6 @@ namespace Ninjin.Cindy
         const string userListEndPoint = "http://heyrict.pythonanywhere.com/api/";
         const string starListEndPoint = "http://heyrict.pythonanywhere.com/api/star";
         /// <summary>
-        /// Type of model
-        /// </summary>
-        public ModelType ModelType { get; private set; }
-        /// <summary>
         /// Endpoint
         /// </summary>
         public string EndPoint { get; private set; }
