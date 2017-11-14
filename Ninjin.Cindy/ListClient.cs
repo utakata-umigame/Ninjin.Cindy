@@ -65,6 +65,11 @@ namespace Ninjin.Cindy
             var res = (IEnumerable<object>)obj.data;//This step depends on Json format.
             Objects.AddRange(res.Select(x => CindyModel.FromJSON(x, ModelType)));
         }
+        /// <summary>
+        /// Convert type into endpoint
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private string SelectEndPoint(ModelType type)
         {
             switch (type)
