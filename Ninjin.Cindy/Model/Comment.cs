@@ -40,11 +40,30 @@ namespace Ninjin.Cindy.Model
         /// Header
         /// </summary>
         public static readonly string CsvHeader = "Id,Sender-Name,Mondai-Id,Mondai-Title,Comment\n";
+        /// <summary>
+        /// id
+        /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// content
+        /// </summary>
         public string Content { get; set; }
+        /// <summary>
+        /// user_id.nickname
+        /// </summary>
         public string SenderName { get; set; }
+        /// <summary>
+        /// mondai_id
+        /// </summary>
         public Mondai Mondai { get; set; }
+        /// <summary>
+        /// user_id
+        /// </summary>
         public User Sender { get; set; }
+        /// <summary>
+        /// Override ToString
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return string.Format("{0},{1},{2},{3},{4}\n",Id,SenderName,Mondai.Id,Mondai.Title,Content);

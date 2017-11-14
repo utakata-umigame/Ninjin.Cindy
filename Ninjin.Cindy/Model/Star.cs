@@ -1,14 +1,22 @@
 ﻿namespace Ninjin.Cindy.Model
 {
+    /// <summary>
+    /// Star model
+    /// </summary>
     public class Star:CindyModel
     {
         /// <summary>
-        /// private constructor
+        /// Constructor
         /// </summary>
         public Star()
         {
 
         }
+        /// <summary>
+        /// Override FromJSON
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override CindyModel FromJSON(dynamic obj)
         {
             return new Star()
