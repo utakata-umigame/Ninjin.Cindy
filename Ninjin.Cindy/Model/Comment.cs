@@ -68,5 +68,13 @@ namespace Ninjin.Cindy.Model
         {
             return string.Format("{0},{1},{2},{3},{4}\n",Id,SenderName,Mondai.Id,Mondai.Title,Content);
         }
+        /// <summary>
+        /// override ToTSCString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToTSVString()
+        {
+            return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\n",Id,SenderName,Mondai.Id,Mondai.Title,Content);
+        }
     }
 }

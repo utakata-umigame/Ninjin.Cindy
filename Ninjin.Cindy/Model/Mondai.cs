@@ -117,5 +117,19 @@ namespace Ninjin.Cindy.Model
                                     Yami, 
                                     Score);
         }
+        /// <summary>
+        /// override ToTSVString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToTSVString()
+        {
+            return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\n",
+                                    Id,
+                                    Genre,
+                                    Title,
+                                    Sender,
+                                    Yami,
+                                    Score);
+        }
     }
 }

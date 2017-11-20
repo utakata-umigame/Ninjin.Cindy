@@ -58,5 +58,11 @@ namespace Ninjin.Cindy.Model
         /// <param name="obj"></param>
         /// <returns></returns>
         public abstract CindyModel FromJSON(dynamic obj);
+
+        /// <summary>
+        /// Convert to TSV string
+        /// </summary>
+        /// <returns></returns>
+        public abstract string ToTSVString();
     }
 }
