@@ -24,7 +24,9 @@ namespace Test
             await client.FetchDataAsync(ModelType.Mondai);
             await client.FetchDataAsync(ModelType.Comment);
             await client.FetchDataAsync(ModelType.Star);
-            foreach (var item in client.Objects.OfType<Mondai>().OrderByDescending(x => x.Score))
+            await client.FetchDataAsync(ModelType.User);
+            var list = client.Objects.OfType<Mondai>().OrderByDescending(x => x.GiverExperience);
+            foreach (var item in list)
             {
                 BeginInvoke(new Action(() =>
                 {
@@ -39,6 +41,13 @@ namespace Test
                 }));
             }
             foreach (var item in client.Objects.OfType<Star>())
+            {
+                BeginInvoke(new Action(() =>
+                {
+                    richTextBox1.Text += item.ToString();
+                }));
+            }
+            foreach(var item in client.Objects.OfType<User>())
             {
                 BeginInvoke(new Action(() =>
                 {
@@ -75,6 +84,10 @@ namespace Test
                     else if (comboBox1.SelectedIndex == 2)
                     {
                         File.WriteAllText(dialog.FileName, Star.CsvHeader + string.Join("", client.Objects.OfType<Star>()), System.Text.Encoding.GetEncoding("shift_jis"));
+                    }
+                    else if (comboBox1.SelectedIndex == 3)
+                    {
+                        File.WriteAllText(dialog.FileName, User.CsvHeader + string.Join("", client.Objects.OfType<User>()), System.Text.Encoding.GetEncoding("shift_jis"));
                     }
                 }
             }

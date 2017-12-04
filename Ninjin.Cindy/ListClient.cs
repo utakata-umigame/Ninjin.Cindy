@@ -24,7 +24,7 @@ namespace Ninjin.Cindy
         
         const string mondaiListEndPoint = "http://heyrict.pythonanywhere.com/api/mondai_list";
         const string commentListEndPoint = "http://heyrict.pythonanywhere.com/api/comment";
-        const string userListEndPoint = "http://heyrict.pythonanywhere.com/api/";
+        const string userListEndPoint = "http://heyrict.pythonanywhere.com/api/profile_list";
         const string starListEndPoint = "http://heyrict.pythonanywhere.com/api/star";
         /// <summary>
         /// Endpoint
