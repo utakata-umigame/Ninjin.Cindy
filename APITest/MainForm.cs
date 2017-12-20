@@ -6,6 +6,7 @@ using System.IO;
 
 using Ninjin.Cindy;
 using Ninjin.Cindy.Model;
+using System.Threading.Tasks;
 
 namespace Test
 {
@@ -26,34 +27,26 @@ namespace Test
             await client.FetchDataAsync(ModelType.Star);
             await client.FetchDataAsync(ModelType.User);
             var list = client.Objects.OfType<Mondai>().OrderByDescending(x => x.GiverExperience);
-            foreach (var item in list)
+
+            BeginInvoke(new Action(() =>
             {
-                BeginInvoke(new Action(() =>
+                foreach (var item in list)
                 {
                     richTextBox1.Text += item.ToString();
-                }));
-            }
-            foreach (var item in client.Objects.OfType<Comment>())
-            {
-                BeginInvoke(new Action(() =>
+                }
+                foreach (var item in client.Objects.OfType<Comment>())
                 {
                     richTextBox1.Text += item.ToString();
-                }));
-            }
-            foreach (var item in client.Objects.OfType<Star>())
-            {
-                BeginInvoke(new Action(() =>
+                }
+                foreach (var item in client.Objects.OfType<Star>())
                 {
                     richTextBox1.Text += item.ToString();
-                }));
-            }
-            foreach(var item in client.Objects.OfType<User>())
-            {
-                BeginInvoke(new Action(() =>
+                }
+                foreach (var item in client.Objects.OfType<User>())
                 {
                     richTextBox1.Text += item.ToString();
-                }));
-            }
+                }
+            }));
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -63,7 +56,7 @@ namespace Test
             {
                 return;
             }
-            //check combobox selected
+            //make sure an item in combobox is selected
             if (comboBox1.SelectedIndex == -1)
             {
                 return;
