@@ -19,7 +19,7 @@ namespace Test
         ListClient client;
         private async void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = "";
+            listBox1.Items.Clear();
             client = new ListClient();
             
             await client.FetchDataAsync(ModelType.Mondai);
@@ -32,19 +32,19 @@ namespace Test
             {
                 foreach (var item in list)
                 {
-                    richTextBox1.Text += item.ToString();
+                    listBox1.Items.Add(item.ToString());
                 }
                 foreach (var item in client.Objects.OfType<Comment>())
                 {
-                    richTextBox1.Text += item.ToString();
+                    listBox1.Items.Add(item.ToString());
                 }
                 foreach (var item in client.Objects.OfType<Star>())
                 {
-                    richTextBox1.Text += item.ToString();
+                    listBox1.Items.Add(item.ToString());
                 }
                 foreach (var item in client.Objects.OfType<User>())
                 {
-                    richTextBox1.Text += item.ToString();
+                    listBox1.Items.Add(item.ToString());
                 }
             }));
         }
