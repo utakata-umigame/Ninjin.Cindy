@@ -2,6 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using System.IO;
 
 using Ninjin.Cindy;
@@ -27,7 +28,6 @@ namespace Test
             await client.FetchDataAsync(ModelType.Star);
             await client.FetchDataAsync(ModelType.User);
             var list = client.Objects.OfType<Mondai>().OrderByDescending(x => x.GiverExperience);
-
             BeginInvoke(new Action(() =>
             {
                 foreach (var item in list)
@@ -81,6 +81,15 @@ namespace Test
                     else if (comboBox1.SelectedIndex == 3)
                     {
                         File.WriteAllText(dialog.FileName, User.CsvHeader + string.Join("", client.Objects.OfType<User>()), System.Text.Encoding.GetEncoding("shift_jis"));
+                    }
+                    else if (comboBox1.SelectedIndex == 4)
+                    {
+                        var mondais = client.Objects.OfType<Mondai>();
+                        var stars = client.Objects.OfType<Star>();
+                        var docs = client.Objects
+                            .OfType<User>()
+                            .Select(user => string.Format("{0},{1},{2},{3},{4}", user.Nickname, mondais.Count(x => x.SenderId == user.Id), stars.Count(x => x.Mondai.SenderId == user.Id), stars.Where(x=>x.Mondai.SenderId==user.Id).Sum(x => x.Value), user.Experience));
+                        File.WriteAllText(dialog.FileName, "NickName,Mondai Count,Star Count,Total Star,Experience\n" + string.Join("\n", docs), System.Text.Encoding.GetEncoding("shift_jis"));
                     }
                 }
             }
